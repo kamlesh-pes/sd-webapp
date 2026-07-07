@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahastra Digital — Tech, Without Limits</title>
+<meta name="description" content="Sahastra Digital — smart devices and connected tech for a thousand ways to work, play and grow.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1729;
+    --ink-soft:#4B5468;
+    --paper:#FAFAFA;
+    --paper-dim:#F1F3F6;
+    --line:#E4E7EC;
+    --blue-deep:#0B3FCC;
+    --blue:#1E6BFF;
+    --blue-light:#38BDF8;
+    --orange:#FF7A1A;
+    --orange-light:#FFB347;
+    --white:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .grad-text{
+    background:linear-gradient(100deg,var(--blue) 0%, var(--blue-light) 35%, var(--orange) 65%, var(--orange-light) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .diag-rule{
+    height:3px;
+    width:64px;
+    background:linear-gradient(100deg,var(--blue) 0%, var(--orange) 100%);
+    border-radius:2px;
+  }
+  ::selection{background:var(--blue-light);color:var(--white);}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,250,250,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 32px;max-width:1180px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand img{height:38px;width:38px;}
+  .brand span{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;}
+  nav.links{display:flex;gap:32px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+  nav.links a:hover{color:var(--ink);}
+  .nav-actions{display:flex;align-items:center;gap:18px;}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);background:var(--white);
+    font-size:13px;position:relative;
+  }
+  .icon-btn .badge{
+    position:absolute;top:-4px;right:-4px;
+    background:var(--orange);color:#fff;
+    font-size:10px;font-weight:700;
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 22px;border-radius:999px;
+    font-weight:600;font-size:14.5px;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{
+    background:linear-gradient(100deg,var(--blue) 0%, var(--orange) 100%);
+    color:#fff;
+    box-shadow:0 6px 18px -6px rgba(30,107,255,0.5);
+  }
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .menu-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:88px 0 96px;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(ellipse 620px 420px at 82% 8%, rgba(255,122,26,0.14), transparent 60%),
+      radial-gradient(ellipse 620px 420px at 10% 30%, rgba(30,107,255,0.14), transparent 60%);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;font-weight:500;
+    color:var(--blue-deep);
+    background:var(--white);
+    border:1px solid var(--line);
+    padding:6px 14px;border-radius:999px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange);}
+  .hero h1{
+    font-size:clamp(38px, 5vw, 60px);
+    line-height:1.04;
+    font-weight:700;
+    margin-bottom:22px;
+  }
+  .hero p.lead{
+    font-size:18px;color:var(--ink-soft);max-width:480px;margin-bottom:34px;
+  }
+  .hero-ctas{display:flex;gap:14px;margin-bottom:40px;flex-wrap:wrap;}
+  .trust-row{display:flex;gap:28px;flex-wrap:wrap;}
+  .trust-item{display:flex;flex-direction:column;}
+  .trust-item .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;}
+  .trust-item .lbl{font-size:12.5px;color:var(--ink-soft);}
+
+  /* Hero visual: infinity-arrow motif, echoing the mark */
+  .hero-visual{
+    position:relative;
+    aspect-ratio:1/1;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-orbit{
+    position:absolute;inset:0;
+    border-radius:50%;
+    border:1px dashed var(--line);
+    animation:spin 40s linear infinite;
+  }
+  .hero-orbit.inner{inset:14%;animation-duration:28s;animation-direction:reverse;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero-card{
+    position:relative;z-index:2;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:34px;
+    width:78%;
+    box-shadow:0 30px 60px -30px rgba(15,23,41,0.25);
+  }
+  .hero-card img{width:100%;border-radius:14px;margin-bottom:18px;}
+  .hero-card .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-soft);
+    display:flex;justify-content:space-between;margin-bottom:6px;
+  }
+  .hero-card h3{font-size:19px;margin-bottom:4px;}
+  .hero-card .price{
+    display:flex;align-items:baseline;gap:8px;margin-top:10px;
+  }
+  .hero-card .price .now{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;}
+  .hero-card .price .was{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-soft);text-decoration:line-through;}
+  .float-chip{
+    position:absolute;z-index:3;
+    background:var(--white);border:1px solid var(--line);
+    border-radius:12px;padding:10px 14px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    box-shadow:0 14px 30px -14px rgba(15,23,41,0.25);
+    display:flex;align-items:center;gap:8px;
+  }
+  .float-chip.a{top:6%;left:-4%;animation:float 5s ease-in-out infinite;}
+  .float-chip.b{bottom:10%;right:-6%;animation:float 6s ease-in-out infinite 0.6s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  .chip-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(100deg,var(--blue),var(--orange));}
+
+  /* ---------- Marquee strip ---------- */
+  .strip{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--white);
+    overflow:hidden;padding:16px 0;
+  }
+  .strip-track{
+    display:flex;gap:64px;white-space:nowrap;
+    animation:marquee 24s linear infinite;
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink-soft);
+  }
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- Section shared ---------- */
+  section{padding:96px 0;}
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:48px;gap:24px;flex-wrap:wrap;
+  }
+  .sec-head .diag-rule{margin-bottom:16px;}
+  .sec-head h2{font-size:clamp(28px,3.4vw,38px);font-weight:700;max-width:520px;}
+  .sec-head p{color:var(--ink-soft);max-width:380px;font-size:15px;}
+
+  /* ---------- Categories ---------- */
+  .cat-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  }
+  .cat-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;display:flex;flex-direction:column;gap:14px;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .cat-card:hover{border-color:var(--blue-light);transform:translateY(-3px);}
+  .cat-icon{
+    width:44px;height:44px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+    background:linear-gradient(135deg,rgba(30,107,255,0.12),rgba(255,122,26,0.12));
+  }
+  .cat-card h3{font-size:16.5px;}
+  .cat-card .cnt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);}
+
+  /* ---------- Products ---------- */
+  .prod-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+  }
+  .prod-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:box-shadow .18s ease, transform .18s ease;
+  }
+  .prod-card:hover{box-shadow:0 24px 40px -26px rgba(15,23,41,0.3);transform:translateY(-4px);}
+  .prod-media{
+    position:relative;aspect-ratio:4/3;
+    background:var(--paper-dim);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .prod-media .glyph{font-size:52px;opacity:0.85;}
+  .prod-media::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(140deg, rgba(30,107,255,0.10), rgba(255,122,26,0.10));
+  }
+  .prod-badge{
+    position:absolute;top:12px;left:12px;z-index:2;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;
+    background:var(--ink);color:#fff;padding:4px 9px;border-radius:999px;
+  }
+  .prod-badge.new{background:var(--blue);}
+  .prod-badge.sale{background:var(--orange);}
+  .wish-btn{
+    position:absolute;top:10px;right:10px;z-index:2;
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(255,255,255,0.9);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;
+  }
+  .prod-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .prod-cat{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.06em;}
+  .prod-body h3{font-size:16px;font-weight:600;}
+  .stars{font-size:12px;color:var(--orange);letter-spacing:1px;}
+  .stars span{color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-left:4px;}
+  .prod-foot{
+    display:flex;align-items:center;justify-content:space-between;margin-top:6px;
+  }
+  .prod-price{display:flex;align-items:baseline;gap:6px;}
+  .prod-price .now{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
+  .prod-price .was{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);text-decoration:line-through;}
+  .add-btn{
+    width:36px;height:36px;border-radius:10px;border:none;cursor:pointer;
+    background:var(--ink);color:#fff;font-size:16px;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+  }
+  .add-btn:hover{background:linear-gradient(100deg,var(--blue),var(--orange));}
+  .prod-grid-foot{display:flex;justify-content:center;margin-top:44px;}
+
+  /* ---------- Signature: Infinity band ---------- */
+  .infinity-band{
+    background:var(--ink);
+    color:#fff;
+    padding:80px 0;
+    position:relative;overflow:hidden;
+  }
+  .infinity-band::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse 700px 300px at 50% 0%, rgba(56,189,248,0.18), transparent 60%);
+  }
+  .infinity-inner{
+    display:flex;align-items:center;gap:56px;flex-wrap:wrap;justify-content:space-between;
+  }
+  .infinity-copy{max-width:440px;}
+  .infinity-copy .eyebrow{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.14);color:var(--orange-light);}
+  .infinity-copy h2{color:#fff;font-size:clamp(26px,3vw,34px);margin-bottom:14px;}
+  .infinity-copy p{color:rgba(255,255,255,0.65);font-size:15px;}
+  .stat-loop{display:flex;gap:44px;flex-wrap:wrap;}
+  .stat-loop .stat{display:flex;flex-direction:column;gap:4px;}
+  .stat-loop .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;}
+  .stat-loop .num .grad-text{background:linear-gradient(100deg,var(--blue-light),var(--orange-light));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stat-loop .lbl{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,0.55);}
+
+  /* ---------- Why us ---------- */
+  .why-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .why-card{
+    padding:28px;border-radius:var(--radius);border:1px solid var(--line);background:var(--white);
+  }
+  .why-card .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--orange);margin-bottom:14px;}
+  .why-card h3{font-size:18px;margin-bottom:8px;}
+  .why-card p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- Newsletter ---------- */
+  .newsletter{
+    background:linear-gradient(100deg, rgba(30,107,255,0.08), rgba(255,122,26,0.08));
+    border-radius:24px;border:1px solid var(--line);
+    padding:56px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  }
+  .newsletter h2{font-size:26px;margin-bottom:8px;}
+  .newsletter p{color:var(--ink-soft);font-size:14.5px;max-width:360px;}
+  .news-form{display:flex;gap:10px;}
+  .news-form input{
+    padding:12px 16px;border-radius:999px;border:1px solid var(--line);
+    font-family:'Inter',sans-serif;font-size:14px;width:260px;background:var(--white);
+  }
+  .news-form input:focus{outline:2px solid var(--blue);}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink);color:rgba(255,255,255,0.7);
+    padding:64px 0 28px;
+  }
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;
+  }
+  .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .foot-brand img{height:32px;width:32px;filter:brightness(0) invert(1);opacity:0.95;}
+  .foot-brand span{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;color:#fff;}
+  footer p.desc{font-size:13.5px;line-height:1.6;max-width:280px;}
+  footer h4{color:#fff;font-size:13.5px;margin-bottom:16px;font-weight:600;}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  footer ul a{font-size:13.5px;color:rgba(255,255,255,0.65);}
+  footer ul a:hover{color:#fff;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    font-size:12.5px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,0.45);
+  }
+  .foot-bottom a{color:rgba(255,255,255,0.65);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px){
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;max-width:380px;margin:0 auto 20px;}
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .why-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .infinity-inner{flex-direction:column;align-items:flex-start;}
+  }
+  @media (max-width: 560px){
+    .wrap{padding:0 20px;}
+    .cat-grid,.prod-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .newsletter{padding:32px;flex-direction:column;align-items:flex-start;}
+    .news-form{width:100%;}
+    .news-form input{width:100%;flex:1;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#top" aria-label="Sahastra Digital home">
+      <img src="assets/logo.png" alt="Sahastra Digital logo">
+      <span>Sahastra Digital</span>
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#categories">Categories</a>
+      <a href="#products">Shop</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">🔍</button>
+      <button class="icon-btn" aria-label="Cart, 3 items">🛒<span class="badge">3</span></button>
+      <a href="#products" class="btn btn-primary">Shop now</a>
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> A thousand ways to connect</div>
+        <h1>Tech that keeps<br><span class="grad-text">looping forward.</span></h1>
+        <p class="lead">Sahastra Digital curates connected devices, audio and smart-home gear built to outlast the upgrade cycle — chosen, tested, and shipped by people who actually use them.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn btn-primary">Browse the shop →</a>
+          <a href="#why" class="btn btn-ghost">Why Sahastra</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><span class="num">1,000+</span><span class="lbl">SKUs curated</span></div>
+          <div class="trust-item"><span class="num">48hr</span><span class="lbl">Dispatch window</span></div>
+          <div class="trust-item"><span class="num">4.8/5</span><span class="lbl">Avg. review score</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-orbit"></div>
+        <div class="hero-orbit inner"></div>
+        <div class="hero-card">
+          <div class="tag"><span>SKU · SD-0192</span><span>IN STOCK</span></div>
+          <img src="assets/logo.png" alt="Featured product preview" style="background:var(--paper-dim); padding:36px;">
+          <h3>Orbit Pro Earbuds</h3>
+          <p style="font-size:13px;color:var(--ink-soft);">Adaptive noise cancelling, 30hr case</p>
+          <div class="price"><span class="now mono">₹6,499</span><span class="was">₹8,999</span></div>
+        </div>
+        <div class="float-chip a"><span class="chip-dot"></span> Order confirmed</div>
+        <div class="float-chip b"><span class="chip-dot"></span> Free shipping ₹999+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>FREE SHIPPING OVER ₹999</span><span>·</span>
+      <span>7-DAY EASY RETURNS</span><span>·</span>
+      <span>SECURE CHECKOUT</span><span>·</span>
+      <span>1-YEAR WARRANTY ON ELECTRONICS</span><span>·</span>
+      <span>FREE SHIPPING OVER ₹999</span><span>·</span>
+      <span>7-DAY EASY RETURNS</span><span>·</span>
+      <span>SECURE CHECKOUT</span><span>·</span>
+      <span>1-YEAR WARRANTY ON ELECTRONICS</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="diag-rule"></div>
+          <h2>Shop by category</h2>
+        </div>
+        <p>Four aisles, one loop — everything routes back to devices you'll actually keep using.</p>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-card" href="#products">
+          <div class="cat-icon">🎧</div>
+          <h3>Audio</h3>
+          <span class="cnt mono">128 items</span>
+        </a>
+        <a class="cat-card" href="#products">
+          <div class="cat-icon">⌚</div>
+          <h3>Wearables</h3>
+          <span class="cnt mono">96 items</span>
+        </a>
+        <a class="cat-card" href="#products">
+          <div class="cat-icon">💡</div>
+          <h3>Smart Home</h3>
+          <span class="cnt mono">154 items</span>
+        </a>
+        <a class="cat-card" href="#products">
+          <div class="cat-icon">🔌</div>
+          <h3>Power &amp; Cables</h3>
+          <span class="cnt mono">210 items</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" style="background:var(--paper-dim);">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="diag-rule"></div>
+          <h2>Best sellers this week</h2>
+        </div>
+        <p>Ranked by reorder rate, not just first-week hype.</p>
+      </div>
+
+      <div class="prod-grid">
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <span class="prod-badge new">NEW</span>
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">🎧</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Audio</span>
+            <h3>Orbit Pro Earbuds</h3>
+            <span class="stars">★★★★★ <span>(214)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹6,499</span><span class="was">₹8,999</span></div>
+              <button class="add-btn" aria-label="Add Orbit Pro Earbuds to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <span class="prod-badge sale">-20%</span>
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">⌚</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Wearables</span>
+            <h3>Loop Fit Band 3</h3>
+            <span class="stars">★★★★★ <span>(389)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹3,199</span><span class="was">₹3,999</span></div>
+              <button class="add-btn" aria-label="Add Loop Fit Band 3 to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">💡</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Smart Home</span>
+            <h3>Nova Smart Bulb 4-Pack</h3>
+            <span class="stars">★★★★☆ <span>(157)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹1,899</span></div>
+              <button class="add-btn" aria-label="Add Nova Smart Bulb 4-Pack to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <span class="prod-badge">BUNDLE</span>
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">🔌</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Power</span>
+            <h3>Vector 65W GaN Charger</h3>
+            <span class="stars">★★★★★ <span>(432)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹2,299</span></div>
+              <button class="add-btn" aria-label="Add Vector 65W GaN Charger to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">📷</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Smart Home</span>
+            <h3>Sentry Mini Cam</h3>
+            <span class="stars">★★★★☆ <span>(98)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹2,699</span></div>
+              <button class="add-btn" aria-label="Add Sentry Mini Cam to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <span class="prod-badge sale">-15%</span>
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">🎙️</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Audio</span>
+            <h3>Reach Portable Speaker</h3>
+            <span class="stars">★★★★★ <span>(276)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹4,249</span><span class="was">₹4,999</span></div>
+              <button class="add-btn" aria-label="Add Reach Portable Speaker to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">⌨️</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Wearables</span>
+            <h3>Axis Mechanical Keyboard</h3>
+            <span class="stars">★★★★☆ <span>(64)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹5,499</span></div>
+              <button class="add-btn" aria-label="Add Axis Mechanical Keyboard to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="prod-card">
+          <div class="prod-media">
+            <span class="prod-badge new">NEW</span>
+            <button class="wish-btn" aria-label="Add to wishlist">♡</button>
+            <span class="glyph">🔋</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Power</span>
+            <h3>Drift 20K Power Bank</h3>
+            <span class="stars">★★★★★ <span>(143)</span></span>
+            <div class="prod-foot">
+              <div class="prod-price"><span class="now mono">₹2,899</span></div>
+              <button class="add-btn" aria-label="Add Drift 20K Power Bank to cart">+</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="prod-grid-foot">
+        <a href="#" class="btn btn-ghost">View all products →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE BAND -->
+  <section class="infinity-band">
+    <div class="wrap infinity-inner">
+      <div class="infinity-copy">
+        <div class="eyebrow"><span class="dot"></span> Built on repeat business</div>
+        <h2>Every order loops back to a customer we already know.</h2>
+        <p>Sahastra means "a thousand" — the name is a bet that good gear earns a thousand more orders, not just one. That's the whole growth plan.</p>
+      </div>
+      <div class="stat-loop">
+        <div class="stat"><span class="num"><span class="grad-text">92%</span></span><span class="lbl">REPEAT PURCHASE RATE</span></div>
+        <div class="stat"><span class="num"><span class="grad-text">1,000+</span></span><span class="lbl">PRODUCTS LISTED</span></div>
+        <div class="stat"><span class="num"><span class="grad-text">48HR</span></span><span class="lbl">AVG. DISPATCH</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="diag-rule"></div>
+          <h2>Why shop with Sahastra</h2>
+        </div>
+        <p>Three reasons customers come back instead of comparing tabs.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="num mono">01 / SELECTION</div>
+          <h3>Curated, not crammed</h3>
+          <p>Every listing passes a hands-on test before it's allowed on the shelf. We'd rather stock 1,000 good products than 10,000 mediocre ones.</p>
+        </div>
+        <div class="why-card">
+          <div class="num mono">02 / SPEED</div>
+          <h3>48-hour dispatch</h3>
+          <p>Orders placed before 3 PM leave the warehouse the same day. You'll get a tracking link before you've finished your coffee.</p>
+        </div>
+        <div class="why-card">
+          <div class="num mono">03 / SUPPORT</div>
+          <h3>Humans reply to email</h3>
+          <p>Write to info@sahastradigital.com and a real person answers — usually within a few hours, not a ticket queue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section>
+    <div class="wrap">
+      <div class="newsletter">
+        <div>
+          <h2>Get restock alerts first</h2>
+          <p>One email a week. New arrivals, price drops, and nothing else.</p>
+        </div>
+        <form class="news-form" onsubmit="event.preventDefault(); this.querySelector('input').value='Subscribed ✓';">
+          <input type="email" placeholder="you@email.com" required aria-label="Email address">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="assets/logo.png" alt="Sahastra Digital logo">
+          <span>Sahastra Digital</span>
+        </div>
+        <p class="desc">Connected devices for a thousand everyday moments. Curated, tested, and shipped fast.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#categories">Audio</a></li>
+          <li><a href="#categories">Wearables</a></li>
+          <li><a href="#categories">Smart Home</a></li>
+          <li><a href="#categories">Power &amp; Cables</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="mailto:info@sahastradigital.com">Contact us</a></li>
+          <li><a href="#">Shipping &amp; returns</a></li>
+          <li><a href="#">Warranty</a></li>
+          <li><a href="#">Track order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:info@sahastradigital.com">info@sahastradigital.com</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sahastra Digital. All rights reserved.</span>
+      <a href="mailto:info@sahastradigital.com">info@sahastradigital.com</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
